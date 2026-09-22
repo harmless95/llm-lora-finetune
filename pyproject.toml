@@ -1,0 +1,55 @@
+[project]
+name = "llm-lora-finetune"
+version = "0.1.0"
+description = "LoRA/QLoRA fine-tuning and evaluation of an open LLM on a domain task"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+# Heavy ML stack, kept out of base deps and CI. Install locally with:
+# uv sync --extra ml --extra demo --extra tracking
+ml = [
+    "torch>=2.2",
+    "transformers>=4.44",
+    "peft>=0.12",
+    "bitsandbytes>=0.43",
+    "accelerate>=0.33",
+    "trl>=0.9",
+    "datasets>=2.20",
+]
+demo = ["gradio>=4.40"]
+tracking = ["wandb>=0.17"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.11",
+    "ruff>=0.6.9",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+fixable = ["ALL"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["llm_lora_finetune"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_lora_finetune"]
