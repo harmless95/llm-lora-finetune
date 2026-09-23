@@ -5,7 +5,9 @@ description = "LoRA/QLoRA fine-tuning and evaluation of an open LLM on a domain 
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "datasets>=5.0.1",
     "pydantic>=2.7",
+    "pydantic-settings>=2.15.0",
     "pyyaml>=6.0",
     "typer>=0.12",
 ]
